@@ -25,18 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Search Bar Interaction
-    const searchForm = document.querySelector('.search-bar');
-    if (searchForm) {
-        searchForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const searchInput = searchForm.querySelector('input').value;
-            if (searchInput.trim() !== '') {
-                console.log(`Searching for: ${searchInput}`);
-                alert(`Search functionality for "${searchInput}" will be implemented in the backend phase.`);
-            }
-        });
-    }
 
     // 3. Smooth Scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

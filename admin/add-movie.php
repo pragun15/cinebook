@@ -10,13 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rating = trim($_POST['rating'] ?? '');
     $poster_image = trim($_POST['poster_image'] ?? '');
     $description = trim($_POST['description'] ?? '');
+    $ticket_price = (float)($_POST['ticket_price'] ?? 250.00);
 
-    if (empty($title) || empty($genre) || $duration <= 0 || empty($rating) || empty($description)) {
+    if (empty($title) || empty($genre) || $duration <= 0 || empty($rating) || empty($description) || $ticket_price <= 0) {
         $error = "Please fill in all required fields properly.";
     } else {
-        $stmt = $conn->prepare("INSERT INTO movies (title, genre, duration, rating, poster_image, description) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO movies (title, genre, duration, rating, poster_image, description, ticket_price) VALUES (?, ?, ?, ?, ?, ?, ?)");
         if ($stmt) {
-            $stmt->bind_param("ssisss", $title, $genre, $duration, $rating, $poster_image, $description);
+            $stmt->bind_param("ssisssd", $title, $genre, $duration, $rating, $poster_image, $description, $ticket_price);
             if ($stmt->execute()) {
                 header("Location: manage-movies.php?msg=" . urlencode("Movie added successfully."));
                 exit;
@@ -76,6 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="admin-form-group">
                     <label>Rating *</label>
                     <input type="text" name="rating" class="admin-form-control" placeholder="e.g., PG-13, R" required value="<?php echo htmlspecialchars($_POST['rating'] ?? ''); ?>">
+                </div>
+                
+                <div class="admin-form-group">
+                    <label>Ticket Price (₹) *</label>
+                    <input type="number" step="0.01" name="ticket_price" class="admin-form-control" required min="1" value="<?php echo htmlspecialchars($_POST['ticket_price'] ?? '250.00'); ?>">
                 </div>
                 
                 <div class="admin-form-group">

@@ -211,9 +211,7 @@ if ($result && $result->num_rows > 0) {
 
                                     Total:
                                     <span class="amount">
-
-                                        $<?php echo number_format($booking['total_amount'], 2); ?>
-
+                                        ₹<?php echo number_format($booking['total_amount'], 2); ?>
                                     </span>
 
                                 </div>

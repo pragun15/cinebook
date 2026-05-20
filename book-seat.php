@@ -9,7 +9,7 @@ $show_id = (int)$_GET['show_id'];
 
 // Fetch show and movie details using a join
 $stmt = $conn->prepare("
-    SELECT s.*, m.title, m.poster_image, m.genre
+    SELECT s.*, m.title, m.poster_image, m.genre, m.ticket_price
     FROM shows s
     JOIN movies m ON s.movie_id = m.id
     WHERE s.id = ?
@@ -191,8 +191,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </p>
             <?php } ?>
             <p style="font-size: 1.2rem; margin-bottom: 10px;">Selected Seats: <strong id="selected-seats-list" style="color: #3b82f6;">None</strong></p>
-            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #cbd5e1;">Tickets: <span id="ticket-count">0</span> x $<?php echo number_format($show['ticket_price'], 2); ?></p>
-            <h3 style="font-size: 1.8rem; margin: 20px 0;">Total Amount: $<span id="total-amount">0.00</span></h3>
+            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #cbd5e1;">Tickets: <span id="ticket-count">0</span> x ₹<?php echo number_format($show['ticket_price'], 2); ?></p>
+            <h3 style="font-size: 1.8rem; margin: 20px 0;">Total Amount: ₹<span id="total-amount">0.00</span></h3>
 
             <input type="hidden" name="selected_seats" id="selected-seats-input" value="">
             <input type="hidden" name="ticket_count" id="ticket-count-input" value="0">
@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="modal-card">
                 <h3>Booking Successful</h3>
                 <p>Seats: <?php echo htmlspecialchars(implode(', ', $last_booking_seats)); ?></p>
-                <p>Total Amount: $<?php echo number_format($last_booking_total, 2); ?></p>
+                <p>Total Amount: ₹<?php echo number_format($last_booking_total, 2); ?></p>
                 <button type="button" class="btn btn-primary" id="close-success-modal">Close</button>
             </div>
         </div>

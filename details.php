@@ -126,6 +126,10 @@ $shows_result = $show_stmt->get_result();
                     ★ <?php echo htmlspecialchars($movie['rating']); ?>
                 </span>
 
+                <span class="price" style="color:var(--secondary-accent); font-weight:bold; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 20px;">
+                    ₹<?php echo number_format($movie['ticket_price'], 2); ?>
+                </span>
+
             </div>
 
             <div class="details-desc">

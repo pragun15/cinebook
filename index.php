@@ -3,8 +3,21 @@
 require_once 'db.php';
 
 // Fetch movies from database
-$query = "SELECT * FROM movies ORDER BY id ASC";
-$result = mysqli_query($conn, $query);
+$search_query = "";
+if (isset($_GET['search'])) {
+    $search_query = trim($_GET['search']);
+}
+
+if (!empty($search_query)) {
+    $stmt = $conn->prepare("SELECT * FROM movies WHERE title LIKE ? OR genre LIKE ? ORDER BY id ASC");
+    $like_term = "%" . $search_query . "%";
+    $stmt->bind_param("ss", $like_term, $like_term);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $query = "SELECT * FROM movies ORDER BY id ASC";
+    $result = mysqli_query($conn, $query);
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +56,12 @@ $result = mysqli_query($conn, $query);
 
     <!-- Search Section -->
     <section class="search-section">
-        <form class="search-bar">
+        <form class="search-bar" method="GET" action="index.php#movies">
             <input 
                 type="text" 
+                name="search"
                 placeholder="Search for movies..."
+                value="<?php echo htmlspecialchars($search_query); ?>"
             >
 
             <button type="submit" class="btn btn-primary">
@@ -105,6 +120,10 @@ $result = mysqli_query($conn, $query);
                                 ★ <?php echo htmlspecialchars($movie['rating']); ?>
                             </span>
 
+                            <span class="price" style="color:var(--secondary-accent); font-weight:600;">
+                                ₹<?php echo number_format($movie['ticket_price'], 2); ?>
+                            </span>
+
                         </div>
 
                         <!-- View Details Button -->
@@ -125,7 +144,7 @@ $result = mysqli_query($conn, $query);
             }
             else
             {
-                echo "<p style='color:white;'>No movies found in database.</p>";
+                echo "<div style='width:100%; text-align:center; padding: 3rem 0; color:var(--text-muted); font-size:1.2rem;'>No movies found matching your search.</div>";
             }
             ?>
 
