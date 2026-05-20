@@ -60,7 +60,7 @@ $result = mysqli_query($conn, $query);
 
         <h2 class="section-title">Now Showing</h2>
 
-        <div class="movies-grid">
+        <div class="movies-row">
 
             <?php
             if($result && mysqli_num_rows($result) > 0)
