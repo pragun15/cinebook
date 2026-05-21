@@ -218,6 +218,12 @@ if ($result && $result->num_rows > 0) {
 
                             </div>
 
+                            <div class="booking-actions">
+                                <a href="ticket.php?id=<?php echo (int)$booking['booking_id']; ?>" class="btn btn-outline btn-sm">
+                                    View Ticket
+                                </a>
+                            </div>
+
                             <?php if (!empty($booking['booking_date'])): ?>
 
                                 <div class="booking-timestamp">

@@ -49,6 +49,7 @@ $booking_success = false;
 $booking_error = '';
 $last_booking_seats = [];
 $last_booking_total = 0.0;
+$last_booking_id = 0;
 
 $booked_seats = get_booked_seats($conn, $show_id);
 
@@ -104,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     if ($insert_stmt->execute()) {
                         $booking_success = true;
+                        $last_booking_id = $insert_stmt->insert_id;
                         $last_booking_seats = $selected_seats;
                         $last_booking_total = $total_amount;
                         $booked_seats = get_booked_seats($conn, $show_id);
@@ -208,7 +210,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h3>Booking Successful</h3>
                 <p>Seats: <?php echo htmlspecialchars(implode(', ', $last_booking_seats)); ?></p>
                 <p>Total Amount: ₹<?php echo number_format($last_booking_total, 2); ?></p>
-                <button type="button" class="btn btn-primary" id="close-success-modal">Close</button>
+                <div class="modal-actions">
+                    <?php if ($last_booking_id): ?>
+                        <a href="ticket.php?id=<?php echo $last_booking_id; ?>" class="btn btn-outline">View Ticket</a>
+                    <?php endif; ?>
+                    <button type="button" class="btn btn-primary" id="close-success-modal">Close</button>
+                </div>
             </div>
         </div>
     <?php } ?>

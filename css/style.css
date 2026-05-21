@@ -660,6 +660,14 @@ RESPONSIVE DESIGN
     margin-bottom: 10px;
 }
 
+.modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
 /* ========================================
    MY BOOKINGS PAGE
 ======================================== */
@@ -813,6 +821,12 @@ RESPONSIVE DESIGN
     margin-top: 15px;
 }
 
+.booking-actions {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+}
+
 .booking-id {
     color: #64748b;
     font-family: monospace;
@@ -851,6 +865,212 @@ RESPONSIVE DESIGN
     .booking-details-grid {
         grid-template-columns: repeat(2, 1fr);
         row-gap: 20px;
+    }
+}
+
+/* ========================================
+   TICKET PAGE
+======================================== */
+
+.ticket-page {
+    max-width: 1100px;
+    margin: 40px auto 60px;
+    padding: 0 20px;
+    color: white;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.ticket-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 6px;
+}
+
+.ticket-header p {
+    color: var(--text-muted);
+}
+
+.ticket-badge {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.ticket-shell {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 1.2fr 60px 1fr;
+    gap: 24px;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+.ticket-left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.ticket-poster img {
+    width: 140px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.ticket-movie h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.ticket-meta {
+    color: var(--text-muted);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ticket-meta span {
+    color: #64748b;
+}
+
+.ticket-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.ticket-divider span {
+    width: 2px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5) 6px,
+        transparent 6px,
+        transparent 14px
+    );
+}
+
+.ticket-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.ticket-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.ticket-label {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+}
+
+.ticket-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.ticket-stamp {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ticket-message {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 20px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    min-width: 200px;
+    text-align: center;
+}
+
+.ticket-message-label {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.4px;
+}
+
+.ticket-message p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.ticket-actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+    .ticket-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .ticket-divider {
+        display: none;
+    }
+
+    .ticket-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ticket-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    body {
+        background: #ffffff;
+        color: #000000;
+    }
+
+    .navbar,
+    .footer,
+    .ticket-actions {
+        display: none !important;
+    }
+
+    .ticket-page {
+        margin: 0;
+        padding: 0;
+    }
+
+    .ticket-shell {
+        box-shadow: none;
+        border: 1px solid #e2e8f0;
     }
 }
 
